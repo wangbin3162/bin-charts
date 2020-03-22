@@ -45,7 +45,11 @@ import BinCharts from 'bin-charts';
 import App from './App.vue';
 
 // 手动引入 ECharts 各模块来减小打包体积
+import 'echarts/lib/chart/line'
 import 'echarts/lib/chart/bar'
+import 'echarts/lib/chart/pie'
+import 'echarts/lib/chart/radar'
+import 'echarts/lib/component/legend'
 import 'echarts/lib/component/tooltip'
 
 // 如果需要配合 ECharts 扩展使用，只需要直接引入扩展包即可
@@ -53,7 +57,8 @@ import 'echarts/lib/component/tooltip'
 // 需要安装依赖：npm install --save echarts-gl，并添加如下引用
 import 'echarts-gl'
 
-Vue.use(BinCharts);
+// 注册组件后即可使用
+Vue.component(BinCharts.name, BinCharts)
 
 new Vue({
   el: '#app',
@@ -61,4 +66,16 @@ new Vue({
 });
 ```
 
+**注意事项**
 
+在webpack模式下，默认会引入源码版本来实现按需加载，可能会遇到默认配置把 node_modules 中的文件排除在
+Babel 转译范围以外的问题。请按如下方法修改配置：
+
+```javascript
+// vue.config.js
+module.exports = {
+  transpileDependencies: [
+    'bin-charts'
+  ]
+}
+```
