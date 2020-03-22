@@ -6,7 +6,6 @@
   import echarts from 'echarts/lib/echarts'
   import resize from './resize'
 
-  require('./charts-theme')
   export default {
     name: 'BCharts',
     mixins: [resize],
@@ -24,8 +23,7 @@
         required: true
       },
       theme: {
-        type: String,
-        default: 'charts-theme'
+        type: String
       }
     },
     data() {
@@ -54,6 +52,9 @@
     },
     methods: {
       initChart() {
+        if (this.chart) {
+          return
+        }
         this.chart = echarts.init(this.$el, this.theme)
         this.setOptions(this.options)
       },

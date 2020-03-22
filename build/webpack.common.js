@@ -12,7 +12,7 @@ module.exports = merge(webpackBaseConfig, {
   output: {
     path: path.resolve(__dirname, '../lib'),
     publicPath: '/lib/',
-    filename: 'chart.common.js',
+    filename: 'bin-charts.common.js',
     chunkFilename: '[id].js',
     libraryExport: 'default',
     library: 'bin-charts',

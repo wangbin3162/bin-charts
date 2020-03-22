@@ -7,14 +7,13 @@
 ### CDN 安装
 
 通过[unpkg.com/bin-charts](https://unpkg.com/bin-charts/) 可以看到 bin-charts
-最新版本的资源，也可以切换版本选择需要的资源，在页面上引入 js 和 css
-文件即可开始使用：
+最新版本的资源，也可以切换版本选择需要的资源，在页面上引入 js 文件即可开始使用：
 
 ```
 <!-- import Vue.js -->
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-<!-- import stylesheet -->
-<link rel="stylesheet" href="https://unpkg.com/bin-charts@0.1.0/lib/styles/index.css">
+<!-- import echarts -->
+<script src="https://cdn.jsdelivr.net/npm/echarts@4.1.0/dist/echarts.js"></script>
 <!-- import bin-charts -->
 <script src="https://unpkg.com/bin-charts@0.1.0/lib/bin-charts.min.js"></script>
 ```
@@ -34,17 +33,27 @@ yarn add bin-charts
 
 如果您了解node.js、npm安装，并希望配合webpack使用，请阅读下一节：[快速上手](/#/start)。
 
-## 引入
+## 使用方法
+
+用 npm 与 Vue Loader 基于 ES Module 引入（推荐用法）, 具体使用方法见 demo
 
 在 main.js 中写入以下内容：
 
 ```javascript
 import Vue from 'vue';
-import CodeEditor from 'chart';
-import 'chart/lib/style/index.css';
+import BinCharts from 'bin-charts';
 import App from './App.vue';
 
-Vue.use(CodeEditor);
+// 手动引入 ECharts 各模块来减小打包体积
+import 'echarts/lib/chart/bar'
+import 'echarts/lib/component/tooltip'
+
+// 如果需要配合 ECharts 扩展使用，只需要直接引入扩展包即可
+// 以 ECharts-GL 为例：
+// 需要安装依赖：npm install --save echarts-gl，并添加如下引用
+import 'echarts-gl'
+
+Vue.use(BinCharts);
 
 new Vue({
   el: '#app',

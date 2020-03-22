@@ -4,14 +4,12 @@
       "name": "guide",
       "path": "/guide",
       "desc": "介绍"
-    }
-  ],
-  "测试示例": [
+    },
     {
       "name": "charts",
       "path": "/charts",
       "icon": "ios-list-box",
-      "desc": "charts"
+      "desc": "示例"
     }
   ]
 }

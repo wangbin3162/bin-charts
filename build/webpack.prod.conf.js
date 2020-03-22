@@ -15,7 +15,7 @@ module.exports = merge(webpackBaseConfig, {
   output: {
     path: path.resolve(__dirname, '../lib'),
     publicPath: '/lib/',
-    filename: 'chart.min.js',
+    filename: 'bin-charts.min.js',
     library: 'bin-charts',
     libraryTarget: 'umd',
     umdNamedDefine: true

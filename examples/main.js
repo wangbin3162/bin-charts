@@ -20,6 +20,14 @@ import SideNav from './components/side-nav.vue'
 import VueComponent from '../src/index'
 import '../src/styles/index.styl'
 
+// 按需加载
+import 'echarts/lib/chart/line'
+import 'echarts/lib/chart/bar'
+import 'echarts/lib/chart/pie'
+import 'echarts/lib/chart/radar'
+import 'echarts/lib/component/legend'
+import 'echarts/lib/component/tooltip'
+
 Vue.use(BinUI)
 Vue.use(CodeEditor)
 // 当前的组件
