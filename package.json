@@ -1,6 +1,6 @@
 {
   "name": "bin-charts",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "基于echarts的 vue插件，用于配合实现图表组件",
   "main": "lib/bin-charts.common.js",
   "module": "src/components/chart/charts.vue",
