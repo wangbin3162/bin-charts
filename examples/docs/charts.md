@@ -16,7 +16,7 @@
           </div>
           <div slot="right" class="right-container">
             配置项:
-            <b-code-editor v-model="dataSource" @on-change="dataSourceChange"/>
+            <b-code-editor v-model="dataSource" @on-change="dataSourceChange" height="400px"/>
           </div>
         </b-split>
       </div>
@@ -80,7 +80,7 @@
           </div>
           <div slot="right" class="right-container">
             数据源:
-            <b-code-editor v-model="dataSource" @on-change="dataSourceChange"/>
+            <b-code-editor v-model="dataSource" @on-change="dataSourceChange" height="400px"/>
           </div>
         </b-split>
       </div>
