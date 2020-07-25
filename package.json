@@ -27,6 +27,7 @@
   },
   "license": "MIT",
   "dependencies": {
+    "bin-ace-editor": "^0.2.1",
     "resize-observer-polyfill": "^1.5.1"
   },
   "peerDependencies": {
@@ -34,7 +35,6 @@
     "vue": "^2.6.10"
   },
   "devDependencies": {
-    "bin-ace-editor": "^0.2.0",
     "@babel/core": "^7.6.4",
     "@babel/plugin-proposal-class-properties": "^7.5.5",
     "@babel/plugin-syntax-dynamic-import": "^7.2.0",
