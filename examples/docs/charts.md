@@ -7,7 +7,7 @@
 ::: demo
 ```html
 <template>
-    <div style="width: 100%;height: 425px;border:1px solid #ddd;margin: 20px 0;">
+    <div style="width: 100%;height: 340px;border:1px solid #ddd;margin: 20px 0;">
         <b-split :default-percent="50">
           <div slot="left" class="left-container">
             <div id="chart1" style="width: 100%;height: 100%;padding-top:15px;position: relative;">
@@ -16,7 +16,7 @@
           </div>
           <div slot="right" class="right-container">
             配置项:
-            <b-code-editor v-model="dataSource" @on-change="dataSourceChange" height="400px"/>
+            <b-ace-editor v-model="dataSource" @on-change="dataSourceChange" height="300"/>
           </div>
         </b-split>
       </div>
@@ -48,7 +48,7 @@
       }
     },
     created() {
-      this.dataSource = JSON.stringify(this.lineChartOption)
+      this.dataSource = JSON.stringify(this.lineChartOption,null,2)
     },
     methods: {
       dataSourceChange(val) {
@@ -71,7 +71,7 @@
 ::: demo
 ```html
 <template>
-    <div style="width: 100%;height: 425px;border:1px solid #ddd;margin: 20px 0;">
+    <div style="width: 100%;height: 340px;border:1px solid #ddd;margin: 20px 0;">
         <b-split :default-percent="50">
           <div slot="left" class="left-container">
             <div id="chart1" style="width: 100%;height: 100%;padding-top:15px;position: relative;">
@@ -80,7 +80,7 @@
           </div>
           <div slot="right" class="right-container">
             数据源:
-            <b-code-editor v-model="dataSource" @on-change="dataSourceChange" height="400px"/>
+            <b-ace-editor v-model="dataSource" @on-change="dataSourceChange" height="300"/>
           </div>
         </b-split>
       </div>

@@ -6,9 +6,16 @@ import './assets/styles/color-brewer.css'
 import './assets/styles/index.styl'
 import BinUI from 'bin-ui'
 import 'bin-ui/lib/styles/index.css'
-// bin-code-editor
-import CodeEditor from 'bin-code-editor'
-import 'bin-code-editor/lib/styles/index.css'
+
+import Editor from 'bin-ace-editor'
+
+// 按需引入需要的语言包皮肤等资源
+require('brace/ext/emmet') // 如果是lang=html时需引入
+require('brace/ext/language_tools') // language extension
+
+require('brace/mode/json')
+require('brace/snippets/json')
+require('brace/theme/chrome')
 
 // 文档组件引入
 import DemoBlock from './components/demo-block.vue'
@@ -29,9 +36,10 @@ import 'echarts/lib/component/legend'
 import 'echarts/lib/component/tooltip'
 
 Vue.use(BinUI)
-Vue.use(CodeEditor)
 // 当前的组件
 Vue.use(VueComponent)
+// 注册editor
+Vue.component(Editor.name, Editor)
 
 Vue.component('DemoBlock', DemoBlock)
 Vue.component('MainHeader', MainHeader)
