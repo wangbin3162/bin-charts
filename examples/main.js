@@ -9,14 +9,6 @@ import 'bin-ui/lib/styles/index.css'
 
 import Editor from 'bin-ace-editor'
 
-// 按需引入需要的语言包皮肤等资源
-require('brace/ext/emmet') // 如果是lang=html时需引入
-require('brace/ext/language_tools') // language extension
-
-require('brace/mode/json')
-require('brace/snippets/json')
-require('brace/theme/chrome')
-
 // 文档组件引入
 import DemoBlock from './components/demo-block.vue'
 import MainHeader from './components/header.vue'
@@ -34,6 +26,14 @@ import 'echarts/lib/chart/pie'
 import 'echarts/lib/chart/radar'
 import 'echarts/lib/component/legend'
 import 'echarts/lib/component/tooltip'
+
+// 按需引入需要的语言包皮肤等资源
+require('brace/ext/emmet') // 如果是lang=html时需引入
+require('brace/ext/language_tools') // language extension
+
+require('brace/mode/json')
+require('brace/snippets/json')
+require('brace/theme/chrome')
 
 Vue.use(BinUI)
 // 当前的组件

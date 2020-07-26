@@ -27,7 +27,7 @@
   },
   "license": "MIT",
   "dependencies": {
-    "bin-ace-editor": "^0.2.1",
+    "bin-ace-editor": "^0.2.2",
     "resize-observer-polyfill": "^1.5.1"
   },
   "peerDependencies": {
