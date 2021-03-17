@@ -3,7 +3,7 @@
 </template>
 
 <script>
-  import echarts from 'echarts/lib/echarts'
+  import * as echarts from 'echarts'
   import resize from './resize'
 
   export default {
@@ -23,7 +23,7 @@
         required: true
       },
       theme: {
-        type: String
+        type: Object
       }
     },
     data() {

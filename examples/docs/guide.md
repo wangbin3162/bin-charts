@@ -9,6 +9,19 @@
 通过[unpkg.com/bin-charts](https://unpkg.com/bin-charts/) 可以看到 bin-charts
 最新版本的资源，也可以切换版本选择需要的资源，在页面上引入 js 文件即可开始使用：
 
+
+### 最新版本
+
+[![NPM version](https://img.shields.io/npm/v/bin-charts.svg)](https://www.npmjs.com/package/bin-charts)
+
+**注意**
+
+    0.x版本 依赖echarts 4.0+ ， 0.x版本稳定版为0.6.0，目前停止更新。
+    
+    1.x版本 依赖echarts 5.0+
+
+    1.x版本，不在推荐使用转换函数，但仍然可以使用，可以参考实际业务自行配置不同的转换函数
+
 ```
 <!-- import Vue.js -->
 <script src="https://cdn.jsdelivr.net/npm/vue"></script>
