@@ -2,23 +2,24 @@
 
 ### 基础用法
 
-可以用传统的options配置，也可以借助提供的三种默认方法进行格式转换
+根据 <a href="https://echarts.apache.org/zh/option.html#title" target="_blank">options</a> 配置项初始化数据
 
 ::: demo
 
 ```html
 
 <template>
-  <div style="width: 100%;height: 340px;border:1px solid #ddd;margin: 20px 0;">
+  <b-button type="primary" @click="refresh">运行</b-button>
+  <div style="width: 100%;height: 358px;border:1px solid #ddd;margin: 20px 0;">
     <b-split :default-percent="50">
       <div slot="left" class="left-container">
         <div id="chart1" style="width: 100%;height: 100%;padding-top:15px;position: relative;">
-          <b-charts height="350px" :options="lineChartOption" />
+          <b-charts height="340px" ref="chart" :options="lineChartOption" />
         </div>
       </div>
       <div slot="right" class="right-container">
         配置项:
-        <b-ace-editor v-model="dataSource" @on-change="dataSourceChange" height="300" />
+        <b-ace-editor v-model="dataSource" @change="dataSourceChange" height="335" />
       </div>
     </b-split>
   </div>
@@ -58,6 +59,11 @@
         } catch (e) {
 
         }
+      },
+      refresh() {
+        if (this.$refs.chart) {
+          this.$refs.chart.refresh()
+        }
       }
     }
   }
@@ -75,16 +81,19 @@
 ```html
 
 <template>
-  <div style="width: 100%;height: 340px;border:1px solid #ddd;margin: 20px 0;">
+  <b-button type="primary" @click="refresh">运行</b-button>
+  <b-button type="warning" @click="asyncLoad" :loading="loading">延迟载入</b-button>
+  <b-button type="danger" @click="rebuild">重绘</b-button>
+  <div style="width: 100%;height: 358px;border:1px solid #ddd;margin: 20px 0;">
     <b-split :default-percent="50">
       <div slot="left" class="left-container">
         <div id="chart1" style="width: 100%;height: 100%;padding-top:15px;position: relative;">
-          <b-charts height="350px" :theme="theme" :options="lineChartOption" />
+          <b-charts height="340px" ref="chart" :theme="theme" :options="lineChartOption" />
         </div>
       </div>
       <div slot="right" class="right-container">
         数据源:
-        <b-ace-editor v-model="dataSource" @on-change="dataSourceChange" height="300" />
+        <b-ace-editor v-model="dataSource" @change="dataSourceChange" height="335" />
       </div>
     </b-split>
   </div>
@@ -128,10 +137,11 @@
             }
           ]
         },
-        dataSource: ''
+        dataSource: '',
+        loading: false
       }
     },
-    created() {
+    mounted() {
       this.dataSource = JSON.stringify(this.lineChartOption, null, 2)
     },
     methods: {
@@ -140,6 +150,47 @@
           this.lineChartOption = JSON.parse(val)
         } catch (e) {
 
+        }
+      },
+      rebuild() {
+        if (this.$refs.chart) {
+          this.$refs.chart.rebuild()
+        }
+      },
+      refresh() {
+        if (this.$refs.chart) {
+          this.$refs.chart.refresh()
+        }
+      },
+      asyncLoad() {
+        if (this.$refs.chart) {
+          this.loading = true
+          this.$refs.chart.showLoading({
+            text: 'loading',
+            color: '#c23531',
+            textColor: '#000',
+            maskColor: 'rgba(255, 255, 255, 0.8)',
+            zlevel: 0,
+            // 字体大小。从 `v4.8.0` 开始支持。
+            fontSize: 16,
+            // 是否显示旋转动画（spinner）。从 `v4.8.0` 开始支持。
+            showSpinner: true,
+            // 旋转动画（spinner）的半径。从 `v4.8.0` 开始支持。
+            spinnerRadius: 20,
+            // 旋转动画（spinner）的线宽。从 `v4.8.0` 开始支持。
+            lineWidth: 2,
+            // 字体粗细。从 `v5.0.1` 开始支持。
+            fontWeight: 'normal',
+            // 字体风格。从 `v5.0.1` 开始支持。
+            fontStyle: 'normal',
+            // 字体系列。从 `v5.0.1` 开始支持。
+            fontFamily: 'sans-serif'
+          })
+          setTimeout(() => {
+            this.refresh()
+            this.$refs.chart.hideLoading()
+            this.loading = false
+          }, 1500)
         }
       }
     }
@@ -156,7 +207,48 @@
 | width    | 默认宽度   | String  |  —   |   100%  |
 | height   | 默认高度   | String  |  —   |   350px  |
 | options   | 配置项   | Object  |  —   |  — |
-| theme   | 皮肤项  | String  | 可引入src/theme/charts-theme来设置  |   —  |
+| theme   | 皮肤项  | Object  |  不兼容老版本，老版本为默认皮肤字符串  |   —  |
+
+### event
+
+| 参数      | 说明    | 参数      | 返回值|
+|---------- |-------- |---------- |-------------  |
+| getInstance    | 获取echarts初始化实例，等同于组件内部的chart   |  —  |  —   | 
+| setOptions    | 设置配置项   | opts :参数见 <a href="https://echarts.apache.org/zh/option.html#title" target="_blank">官网</a> |  —   |  
+| clear   | 清空当前实例，会移除实例中所有的组件和图表。   | String  |  —   |  
+| resize   | 变图表尺寸，在容器大小发生改变时需要手动调用。   | opts  |  —   |  
+| dispatchAction   | 触发事件  | opts  |  —   |  
+| refresh   | 刷新当前图表，不同于配置项设置，此方法相当于clear后重新setOptions  | —  |  —   |  
+| rebuild   | 重新创建实例，此方法相当于重新创建实例，绑定的事件等需要重新监听  | —  |  —   |  
+| showLoading   | 加载动画   |  opts：参数见下方  |  —   |  
+| hideLoading   | 隐藏动画加载效果  | —  |  —   |  
+
+### 加载动画参数
+
+```javascript
+var options: {
+  text: 'loading',
+  color: '#c23531',
+  textColor: '#000',
+  maskColor: 'rgba(255, 255, 255, 0.8)',
+  zlevel: 0,
+
+  // 字体大小。从 `v4.8.0` 开始支持。
+  fontSize: 12,
+  // 是否显示旋转动画（spinner）。从 `v4.8.0` 开始支持。
+  showSpinner: true,
+  // 旋转动画（spinner）的半径。从 `v4.8.0` 开始支持。
+  spinnerRadius: 10,
+  // 旋转动画（spinner）的线宽。从 `v4.8.0` 开始支持。
+  lineWidth: 5,
+  // 字体粗细。从 `v5.0.1` 开始支持。
+  fontWeight: 'normal',
+  // 字体风格。从 `v5.0.1` 开始支持。
+  fontStyle: 'normal',
+  // 字体系列。从 `v5.0.1` 开始支持。
+  fontFamily: 'sans-serif'
+}
+````
 
 ### 转换函数说明
 

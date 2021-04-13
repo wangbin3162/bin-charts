@@ -3,7 +3,7 @@ import { debounce } from '../../utils/util'
 
 export default {
   mounted() {
-    this.__resizeHandler = debounce(this.resizeChart, 100, false)
+    this.__resizeHandler = debounce(this.resize, 100, false)
     addResizeListener(this.$el, this.__resizeHandler)
   },
   beforeDestroy() {
@@ -15,9 +15,9 @@ export default {
     this.chart = null
   },
   methods: {
-    resizeChart() {
+    resize(opt) {
       if (this.chart) {
-        this.chart.resize()
+        this.chart.resize(opt)
       }
     }
   }
