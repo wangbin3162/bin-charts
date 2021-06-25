@@ -8,7 +8,6 @@
     {
       "name": "charts",
       "path": "/charts",
-      "icon": "ios-list-box",
       "desc": "示例"
     }
   ]

@@ -12,15 +12,19 @@
   <b-button type="primary" @click="refresh">运行</b-button>
   <div style="width: 100%;height: 358px;border:1px solid #ddd;margin: 20px 0;">
     <b-split :default-percent="50">
-      <div slot="left" class="left-container">
-        <div id="chart1" style="width: 100%;height: 100%;padding-top:15px;position: relative;">
-          <b-charts height="340px" ref="chart" :options="lineChartOption" />
+      <template #left>
+        <div class="left-container">
+          <div id="chart1" style="width: 100%;height: 100%;padding-top:15px;position: relative;">
+            <b-charts height="340px" ref="chart" :options="lineChartOption" />
+          </div>
         </div>
-      </div>
-      <div slot="right" class="right-container">
-        配置项:
-        <b-ace-editor v-model="dataSource" @change="dataSourceChange" height="335" />
-      </div>
+      </template>
+      <template #right>
+        <div class="right-container">
+          配置项:
+          <b-ace-editor v-model="dataSource" @change="dataSourceChange" height="335" />
+        </div>
+      </template>
     </b-split>
   </div>
 </template>
@@ -86,15 +90,19 @@
   <b-button type="danger" @click="rebuild">重绘</b-button>
   <div style="width: 100%;height: 358px;border:1px solid #ddd;margin: 20px 0;">
     <b-split :default-percent="50">
-      <div slot="left" class="left-container">
-        <div id="chart1" style="width: 100%;height: 100%;padding-top:15px;position: relative;">
-          <b-charts height="340px" ref="chart" :theme="theme" :options="lineChartOption" />
+      <template #left>
+        <div class="left-container">
+          <div id="chart1" style="width: 100%;height: 100%;padding-top:15px;position: relative;">
+            <b-charts height="340px" ref="chart" :theme="theme" :options="lineChartOption" />
+          </div>
         </div>
-      </div>
-      <div slot="right" class="right-container">
-        数据源:
-        <b-ace-editor v-model="dataSource" @change="dataSourceChange" height="335" />
-      </div>
+      </template>
+      <template #right>
+        <div class="right-container">
+          数据源:
+          <b-ace-editor v-model="dataSource" @change="dataSourceChange" height="335" />
+        </div>
+      </template>
     </b-split>
   </div>
 </template>
@@ -154,7 +162,7 @@
       },
       rebuild() {
         if (this.$refs.chart) {
-          this.$refs.chart.rebuild()
+          this.$refs.chart.init()
         }
       },
       refresh() {
@@ -166,8 +174,8 @@
         if (this.$refs.chart) {
           this.loading = true
           this.$refs.chart.showLoading({
-            text: 'loading',
-            color: '#c23531',
+            text: '加载中',
+            color: '#1089ff',
             textColor: '#000',
             maskColor: 'rgba(255, 255, 255, 0.8)',
             zlevel: 0,
@@ -207,7 +215,6 @@
 | width    | 默认宽度   | String  |  —   |   100%  |
 | height   | 默认高度   | String  |  —   |   350px  |
 | options   | 配置项   | Object  |  —   |  — |
-| theme   | 皮肤项  | Object  |  不兼容老版本，老版本为默认皮肤字符串  |   —  |
 
 ### event
 
@@ -249,49 +256,3 @@ var options: {
   fontFamily: 'sans-serif'
 }
 ````
-
-### 转换函数说明
-
-转换函数通过`this.$formator`调用，也可自行引入，基本适应日常开发需求
-
-```javascript
-// 1.formatDataSet(opts,dataSource) 
-// 转换数据集
-let opts1 = { xField: 'x', yField: 'y', seriesField: 's' }
-let dataSource1 = [
-  { x: '1月', y: '111', s: '系列一' },
-  { x: '1月', y: '222', s: '系列二' },
-  { x: '2月', y: '222', s: '系列一' },
-  { x: '2月', y: '222', s: '系列二' }
-]
-//  return {
-//    source:[
-//      ['x','系列一','系列二'],
-//      ['1月',111,222],
-//      ['2月',222,222]
-//    ]
-//  }
-
-// 2.formatDataSet(opts,dataSource) 
-// 转换成系列平铺数组
-let opts2 = { xField: 'x', yField: 'y', seriesField: 'legend' }
-let dataSource2 = [{ data: [], legend: '系列1' }, { data: [], legend: '系列2' }]
-//  return {
-//    source:[
-//      ['x','系列一','系列二'],
-//      ['1月',111,222],
-//      ['2月',222,222]
-//    ]
-//  }
-
-// 3.formatDataSeries(opts,dataSource) 
-// 转换成类别分组数据，适用于未知系列条目数量的options配置，传统型数据的转换，方便遍历取值
-let opts3 = { xField: 'x', yField: 'y', seriesField: 'legend' }
-let dataSource3 = [{ data: [], legend: '系列1' }, { data: [], legend: '系列2' }]
-//  return [{
-//    seriesName: "自然人"
-//    xAxis: ["1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12"]
-//    data: ["100", "200", "300", "500", "100", "200", "300", "500", "100", "200", "300", "500"]
-//  }]
-```
-

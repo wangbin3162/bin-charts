@@ -1,18 +1,27 @@
 ## 介绍
 
-仿照vue-echarts组件进行echarts的包裹，主要用于解决默认主题问题及响应options配置，并提供若干封装函数用于转换函数
+bin-charts现已更新至3.0.0+版本，为适应vue3+ ，原支持vue2.6版本已拉分支保存，最新保存版本为`1.0.1`版本
 
-## 安装
-
-### CDN 安装
-
-通过[unpkg.com/bin-charts](https://unpkg.com/bin-charts/) 可以看到 bin-charts
-最新版本的资源，也可以切换版本选择需要的资源，在页面上引入 js 文件即可开始使用：
-
+最新vue3版本的charts依赖echarts5+，之前版本暂不支持
 
 ### 最新版本
 
 [![NPM version](https://img.shields.io/npm/v/bin-charts.svg)](https://www.npmjs.com/package/bin-charts)
+
+## 安装
+
+通过[unpkg.com/bin-charts](https://unpkg.com/bin-charts/) 可以看到 bin-charts
+最新版本的资源，也可以切换版本选择需要的资源，在页面上引入 js 和 css
+文件即可开始使用：
+
+```javascript
+<!-- import Vue.js -->
+<script src="https://cdn.jsdelivr.net/npm/vue"></script>
+<!-- import bin-charts -->
+<script src="https://unpkg.com/bin-charts@3.0.0/lib/index.min.js"></script>
+```
+
+`@3.0.0` 表示版本号3.0依赖vue3.0+ ,`@1.0.0` 表示版本号1.0依赖vue2.6 ,
 
 **注意**
 
@@ -20,18 +29,7 @@
     
     1.x版本 依赖echarts 5.0+
 
-    1.x版本，不在推荐使用转换函数，但仍然可以使用，可以参考实际业务自行配置不同的转换函数
-
-```
-<!-- import Vue.js -->
-<script src="https://cdn.jsdelivr.net/npm/vue"></script>
-<!-- import echarts -->
-<script src="https://cdn.jsdelivr.net/npm/echarts@4.1.0/dist/echarts.js"></script>
-<!-- import bin-charts -->
-<script src="https://unpkg.com/bin-charts@0.1.0/lib/bin-charts.min.js"></script>
-```
-    
-`@0.1.0` 表示版本号，我们建议锁定版本号来保证代码的稳定性
+    3.x版本，支持vue3+ echarts 5.0+
 
 ### npm 安装
 
@@ -44,17 +42,13 @@ npm i bin-charts -S
 yarn add bin-charts
 ```
 
-如果您了解node.js、npm安装，并希望配合webpack使用，请阅读下一节：[快速上手](/#/start)。
-
-## 使用方法
-
-用 npm 与 Vue Loader 基于 ES Module 引入（推荐用法）, 具体使用方法见 demo
+## 引入
 
 在 main.js 中写入以下内容：
 
 ```javascript
-import Vue from 'vue';
-import BinCharts from 'bin-charts';
+import { createApp } from 'vue'
+import Charts from 'bin-charts';
 import App from './App.vue';
 
 // 引入 echarts 核心模块，核心模块提供了 echarts 使用必须要的接口。
@@ -84,27 +78,9 @@ echarts.use([
   TooltipComponent,
   CanvasRenderer
 ])
-
-// 旧版本手动引入 ECharts
-// import 'echarts/lib/chart/line'
-// import 'echarts/lib/chart/bar'
-// import 'echarts/lib/chart/pie'
-// import 'echarts/lib/chart/radar'
-// import 'echarts/lib/component/legend'
-// import 'echarts/lib/component/tooltip'
-
-// 如果需要配合 ECharts 扩展使用，只需要直接引入扩展包即可
-// 以 ECharts-GL 为例：
-// 需要安装依赖：npm install --save echarts-gl，并添加如下引用
-// import 'echarts-gl'
-
-// 注册组件后即可使用
-Vue.component(BinCharts.name, BinCharts)
-
-new Vue({
-  el: '#app',
-  render: h => h(App)
-});
+const app = createApp(App)
+app.component(Charts.name, Charts)
+app.mount('#app', true)
 ```
 
 **注意事项**

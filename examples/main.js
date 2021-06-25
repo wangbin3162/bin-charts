@@ -1,23 +1,16 @@
 import '@babel/polyfill'
-import Vue from 'vue'
+import { createApp } from 'vue'
+import router from './route'
 import App from './App.vue'
-import router from './router'
+
+import DemoBlock from './components/demo-block.vue'
+import MainFooter from './components/footer.vue'
+import MainHeader from './components/header.vue'
+import SideNav from './components/side-nav.vue'
 import './assets/styles/color-brewer.css'
 import './assets/styles/index.styl'
-import BinUI from 'bin-ui'
-import 'bin-ui/lib/styles/index.css'
-
-import Editor from 'bin-ace-editor'
-
-// 文档组件引入
-import DemoBlock from './components/demo-block.vue'
-import MainHeader from './components/header.vue'
-import MainFooter from './components/footer.vue'
-import SideNav from './components/side-nav.vue'
-
-// 当前组件的引入
-import VueComponent from '../src/index'
-import '../src/styles/index.styl'
+import BinUI from 'bin-ui-next'
+import 'bin-ui-next/lib/styles/index.css'
 
 // 引入 echarts 核心模块，核心模块提供了 echarts 使用必须要的接口。
 import * as echarts from 'echarts/core'
@@ -34,6 +27,15 @@ import {
 import { TitleComponent, TooltipComponent } from 'echarts/components'
 // 引入 Canvas 渲染器，注意引入 CanvasRenderer 或者 SVGRenderer 是必须的一步
 import { CanvasRenderer } from 'echarts/renderers'
+// 当前组件的引入
+import Charts from '../src/components/charts'
+import Editor from 'bin-ace-editor';
+
+import 'brace/ext/emmet'
+import 'brace/ext/language_tools'
+import 'brace/mode/json'
+import 'brace/snippets/json'
+import 'brace/theme/chrome'
 // 注册必须的组件
 echarts.use([
   BarChart,
@@ -46,26 +48,22 @@ echarts.use([
   TooltipComponent,
   CanvasRenderer
 ])
-// 按需引入需要的语言包皮肤等资源
-require('brace/ext/emmet') // 如果是lang=html时需引入
-require('brace/ext/language_tools') // language extension
 
-require('brace/mode/json')
-require('brace/snippets/json')
-require('brace/theme/chrome')
+const app = createApp(App)
+app.use(BinUI) // , { disabledDoc: true }
+app.config.productionTip = false
 
-Vue.use(BinUI)
-// 当前的组件
-Vue.use(VueComponent)
-// 注册editor
-Vue.component(Editor.name, Editor)
+app.component('DemoBlock', DemoBlock)
+app.component('MainHeader', MainHeader)
+app.component('MainFooter', MainFooter)
+app.component('SideNav', SideNav)
 
-Vue.component('DemoBlock', DemoBlock)
-Vue.component('MainHeader', MainHeader)
-Vue.component('MainFooter', MainFooter)
-Vue.component('SideNav', SideNav)
+// 注册组件后即可使用
+app.component(Charts.name, Charts)
+app.component(Editor.name, Editor)
 
-new Vue({
-  router,
-  render: h => h(App)
-}).$mount('#app')
+app.use(router)
+// Mount when the route is ready
+router.isReady().then(() => {
+  app.mount('#app', true)
+})

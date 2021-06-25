@@ -1,25 +1,19 @@
-// 核心插件
-import corePlugin from './plugin'
-// 组件
-import Charts from './components/chart'
+import Charts from './components/charts'
+import log from './utils/log'
 
-const components = [
-  Charts
-]
+import config from '../package.json'
 
-const install = function (Vue) {
-  components.forEach(component => {
-    Vue.component(component.name, component)
-  })
+const version = config.version // version_ to fix tsc issue
 
-  Vue.use(corePlugin)
+const install = function (app, options = {}) {
+  app.component(Charts.name, Charts)
+
+  if (!options.disabledDoc) {
+    log.pretty(`[${config.name}] ${config.version}`, config.homepage)
+  }
+  return app
 }
 
-/* istanbul ignore if */
-if (typeof window !== 'undefined' && window.Vue) {
-  install(window.Vue)
-}
+export { Charts }
 
-export default {
-  install, Charts
-}
+export default { version, install }
