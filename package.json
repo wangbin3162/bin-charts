@@ -29,6 +29,7 @@
   },
   "dependencies": {
     "bin-ace-editor": "^3.0.2",
+    "highlight.js": "^11.0.1",
     "resize-observer-polyfill": "^1.5.1"
   },
   "peerDependencies": {
@@ -54,6 +55,7 @@
     "cross-env": "^7.0.2",
     "css-loader": "^4.2.2",
     "css-minimizer-webpack-plugin": "^1.1.5",
+    "echarts": "^5.1.2",
     "eslint": "^7.7.0",
     "eslint-plugin-vue": "^7.5.0",
     "file-loader": "^6.0.0",
@@ -62,7 +64,6 @@
     "gulp-autoprefixer": "^7.0.1",
     "gulp-cssmin": "^0.2.0",
     "gulp-stylus": "^2.7.0",
-    "highlight.js": "^10.5.0",
     "html-webpack-plugin": "^4.3.0",
     "markdown-it": "^12.0.4",
     "markdown-it-anchor": "^7.0.0",
@@ -84,7 +85,6 @@
     "transliteration": "^2.2.0",
     "url-loader": "^4.1.1",
     "vue": "^3.0.5",
-    "echarts": "^5.1.2",
     "vue-loader": "^16.1.2",
     "vue-router": "^4.0.2",
     "vue-template-compiler": "^2.6.12",
