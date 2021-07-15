@@ -4,7 +4,6 @@
 
 <script>
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import useResize from './resize'
 import * as echarts from 'echarts'
 import { debounce } from '../../utils/utils'
 import { addResizeListener, removeResizeListener } from '../../utils/resize-event'

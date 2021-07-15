@@ -1,7 +1,7 @@
 {
   "name": "bin-charts",
   "description": "基于echarts的 vue插件，用于配合实现图表组件",
-  "version": "3.0.0",
+  "version": "3.0.1",
   "keywords": [
     "bin-charts",
     "vue3",
@@ -27,14 +27,10 @@
     "lint": "eslint ./src --ext .vue,.js,.ts",
     "lint-fix": "eslint --fix ./src --ext .vue,.js,.ts"
   },
-  "dependencies": {
-    "bin-ace-editor": "^3.0.2",
-    "highlight.js": "^11.0.1",
-    "resize-observer-polyfill": "^1.5.1"
-  },
   "peerDependencies": {
     "echarts": "^5.1.2",
-    "vue": "^3.0.5"
+    "vue": "^3.0.5",
+    "resize-observer-polyfill": "^1.5.1"
   },
   "devDependencies": {
     "@babel/core": "^7.11.4",
@@ -85,6 +81,8 @@
     "transliteration": "^2.2.0",
     "url-loader": "^4.1.1",
     "vue": "^3.0.5",
+    "bin-ace-editor": "^3.0.2",
+    "highlight.js": "^11.0.1",
     "vue-loader": "^16.1.2",
     "vue-router": "^4.0.2",
     "vue-template-compiler": "^2.6.12",
