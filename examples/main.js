@@ -2,15 +2,16 @@ import '@babel/polyfill'
 import { createApp } from 'vue'
 import router from './route'
 import App from './App.vue'
+import BinUI from 'bin-ui-next'
+import 'bin-ui-next/lib/styles/normalize.css'
+import 'bin-ui-next/lib/styles/index.css'
+import './assets/styles/index.styl'
 
 import DemoBlock from './components/demo-block.vue'
 import MainFooter from './components/footer.vue'
 import MainHeader from './components/header.vue'
 import SideNav from './components/side-nav.vue'
-import './assets/styles/color-brewer.css'
-import './assets/styles/index.styl'
-import BinUI from 'bin-ui-next'
-import 'bin-ui-next/lib/styles/index.css'
+// 自定义组件库内容
 
 // 引入 echarts 核心模块，核心模块提供了 echarts 使用必须要的接口。
 import * as echarts from 'echarts/core'
@@ -21,7 +22,7 @@ import {
   PieChart,
   RadarChart,
   ScatterChart,
-  EffectScatterChart
+  EffectScatterChart,
 } from 'echarts/charts'
 // 引入提示框，标题，直角坐标系组件，组件后缀都为 Component
 import { TitleComponent, TooltipComponent } from 'echarts/components'
@@ -29,7 +30,7 @@ import { TitleComponent, TooltipComponent } from 'echarts/components'
 import { CanvasRenderer } from 'echarts/renderers'
 // 当前组件的引入
 import Charts from '../src/components/charts'
-import Editor from 'bin-ace-editor';
+import Editor from 'bin-ace-editor'
 
 import 'brace/ext/emmet'
 import 'brace/ext/language_tools'
@@ -46,11 +47,11 @@ echarts.use([
   EffectScatterChart,
   TitleComponent,
   TooltipComponent,
-  CanvasRenderer
+  CanvasRenderer,
 ])
 
 const app = createApp(App)
-app.use(BinUI) // , { disabledDoc: true }
+app.use(BinUI, { disabledDoc: true })
 app.config.productionTip = false
 
 app.component('DemoBlock', DemoBlock)
