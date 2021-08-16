@@ -29,7 +29,7 @@ import { TitleComponent, TooltipComponent } from 'echarts/components'
 // 引入 Canvas 渲染器，注意引入 CanvasRenderer 或者 SVGRenderer 是必须的一步
 import { CanvasRenderer } from 'echarts/renderers'
 // 当前组件的引入
-import Charts from '../src/components/charts'
+import Charts from 'bin-charts'
 import Editor from 'bin-ace-editor'
 
 import 'brace/ext/emmet'
@@ -52,6 +52,7 @@ echarts.use([
 
 const app = createApp(App)
 app.use(BinUI, { disabledDoc: true })
+app.use(Charts)
 app.config.productionTip = false
 
 app.component('DemoBlock', DemoBlock)
@@ -60,7 +61,6 @@ app.component('MainFooter', MainFooter)
 app.component('SideNav', SideNav)
 
 // 注册组件后即可使用
-app.component(Charts.name, Charts)
 app.component(Editor.name, Editor)
 
 app.use(router)
