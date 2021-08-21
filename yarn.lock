@@ -1996,10 +1996,10 @@ bin-ace-editor@^3.1.1:
   dependencies:
     brace "^0.11.1"
 
-bin-ui-next@^0.8.10:
-  version "0.8.10"
-  resolved "https://registry.npmjs.org/bin-ui-next/-/bin-ui-next-0.8.10.tgz#5ddf1a73afd1f9e4884cc251298dbd32ec86a357"
-  integrity sha512-lia46Rdatji0dLC19srmwh85LcME2CU1ZnQRz8XdtZgtxehgxSKYR7IGnJ0dlPL/K6Lag9t814ymNrki2fdh9A==
+bin-ui-next@^0.9.4:
+  version "0.9.4"
+  resolved "https://registry.npmjs.org/bin-ui-next/-/bin-ui-next-0.9.4.tgz#8fed574433e5f6391bb61273ebb090c3aabca531"
+  integrity sha512-kq9AdN83QoFETmhO0WNb/fkWEGpZxJqqaQs1mZ/W90gBBe/Xjf06F+lkYFWolMhZ/EkEnGqJFWgNekeihVtPHg==
   dependencies:
     "@popperjs/core" "^2.9.2"
     async-validator "^3.4.0"
