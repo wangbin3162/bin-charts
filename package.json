@@ -1,6 +1,6 @@
 {
   "name": "bin-charts",
-  "version": "1.0.1",
+  "version": "3.2.0",
   "description": "基于echarts的 vue插件，用于配合实现图表组件",
   "main": "lib/bin-charts.common.js",
   "module": "src/components/chart/charts.vue",
@@ -79,6 +79,7 @@
     "transliteration": "^2.1.7",
     "uglifyjs-webpack-plugin": "^2.2.0",
     "url-loader": "^2.2.0",
+    "echarts": "^5.0.0",
     "vue": "^2.6.10",
     "vue-loader": "^15.7.1",
     "vue-router": "^3.1.3",
